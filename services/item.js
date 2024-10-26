@@ -1,4 +1,4 @@
-import {MAX_PARALLEL_REQUESTS, processInBatches, WOW_GOLD_CAP} from './utils.js'
+import {MAX_PARALLEL_REQUESTS, processInBatches, WOW_GOLD_CAP} from '../utils.js'
 import { fetchConnectedRealms } from '../consumers/realm.js';
 import { fetchAuctionsForRealm } from '../consumers/auctions.js';
 

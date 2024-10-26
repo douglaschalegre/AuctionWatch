@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {BNET_API_URL} from './config.js'
 
 // Função para consultar os leilões de um connected realm
 export async function fetchAuctions(connectedRealmId, accessToken) {

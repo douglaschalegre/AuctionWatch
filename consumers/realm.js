@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {BNET_API_URL} from './config.js'
 
 // Função para buscar todos os connected realms
 export async function fetchConnectedRealms(accessToken) {

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {BNET_API_URL} from './config.js'
 
 export async function fetchItemInfo(itemId, accessToken) {
   try {

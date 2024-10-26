@@ -15,7 +15,7 @@ export async function getAccessToken() {
                 password: BNET_CLIENT_SECRET
             }
         });
-        console.log("[!] Access token obtido com sucesso!");
+        console.log("[*] Access token obtido com sucesso!");
         return response.data.access_token;
     } catch (error) {
         console.error("Erro ao obter o token de acesso:", error);

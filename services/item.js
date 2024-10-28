@@ -15,7 +15,6 @@ export async function fetchItemInAllRealms(itemId, accessToken) {
     // Função para verificar se o item tem o menor ou maior valor encontrado até agora
     function checkIfItemHasExtremeValue(auction, realmId, itemId) {
         if (auction.item.id === parseInt(itemId)){
-            console.log('Found relevant item! Calculating if is cheaper or expensier')
             if (auction.buyout < cheapestItemValue){
                 cheapestItemValue = auction.buyout;
                 cheapestItemServer = realmId;

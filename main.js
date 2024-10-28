@@ -6,7 +6,8 @@ import { MonitoredItem } from './domain/models/MonitoredItem.js';
 import { getAccessToken } from './consumers/login.js';
 import { fetchAuctions } from './consumers/auctions.js';
 
-import { fetchItemInAllRealms } from './services/item.js';
+import { fetchItemInAllRealms, fetchMonitoredItemsInAllRealms } from './services/item.js';
+import { findMonitoredItems } from './repositories/monitoredItems.js'
 
 (async () => {
     try {
@@ -22,7 +23,7 @@ const PORT = 3000;
 app.use(express.json());
 dotenv.config();
 
-let accessToken = getAccessToken();
+let accessToken = await getAccessToken();
 
 // Configura a rota para obter leilões
 app.get('/auctions/:connectedRealmId', async (req, res) => {
@@ -45,6 +46,24 @@ app.get('/item-auctions/:itemId', async (req, res) => {
     } else {
         res.status(404).send("Item não encontrado em nenhum connected realm.");
     }
+});
+
+app.get('/item-auctions/monitored-items', async (req, res) => {
+  const data = await fetchMonitoredItemsInAllRealms(accessToken);
+  if (data.itemData.length > 0) {
+      res.json(data);
+  } else {
+      res.status(404).send("Item não encontrado em nenhum connected realm.");
+  }
+});
+
+app.get('/monitored-items', async (req, res) => {
+  try {
+    const monitoredItems = await findMonitoredItems()
+    res.json({ items: monitoredItems });
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao buscar itens monitorados" });
+  }
 });
 
 // Endpoint para adicionar um item à lista monitorada
